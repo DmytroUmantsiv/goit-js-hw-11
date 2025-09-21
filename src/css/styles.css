@@ -7,12 +7,167 @@
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader.hidden {
+  display: none;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #ccc;
+  border-top-color: #1d72b8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* ------------------------------------------------ */
+
+/* ===== Форма пошуку ===== */
+.form {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+  margin-bottom: 32px;
+  gap: 8px;
+}
+
+.input-text {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #808080;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  padding: 8px 16px;
+  width: 272px;
+  height: 40px;
+}
+.input-text:hover {
+  border: 1px solid #000000;
+}
+
+.input-text:focus {
+  border: 1px solid #4e75ff;
+}
+
+.form button {
+  padding: 8px 16px;
+  background-color: #4f7cff; /* синій колір як у макеті */
+  color: #fff;
+  width: 91px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #6c8cff;
+}
+
+/* ===== Галерея ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.gallery-item {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+/* ===== Дані під зображенням ===== */
+.gallery-item .info {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  font-size: 14px;
+  color: #555;
+  background-color: #fafafa;
+}
+
+.gallery-item .info li b {
+  display: block;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+/* ===== Помилка та попередження ===== */
+
+/* стиль для всього toast контейнера */
+.iziToast.iziToast-error {
+  background-color: #ef4040 !important;
+  color: #fafafb !important;
+  border-bottom: 2px solid #ffbebe !important;
+  border-radius: 4px !important;
+  padding: 20px !important;
+  min-width: 320px !important;
+  max-width: 480px !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.03em !important;
+  box-sizing: border-box !important;
+}
+
+.iziToast.iziToast-error .iziToast-message {
+  color: #fafafb !important;
+  font-size: 16px !important;
+}
+
+/* Warning toast */
+.iziToast.iziToast-warning {
+  background-color: #fff4e5 !important;
+  color: #cc6600 !important;
+  border-left: 5px solid orange !important;
+  border-radius: 4px !important;
+  padding: 20px !important;
+  min-width: 320px !important;
+  max-width: 480px !important;
+  font-size: 16px !important;
+  box-sizing: border-box !important;
+}
+
+.iziToast.iziToast-warning .iziToast-message {
+  color: #cc6600 !important;
+  font-size: 16px !important;
+}
