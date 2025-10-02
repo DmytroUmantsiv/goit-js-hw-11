@@ -13,7 +13,7 @@ import '/css/styles.css';
 const form = document.querySelector('.form');
 const input = form.querySelector("input[name='search-text']");
 
-form.addEventListener('submit', async event => {
+form.addEventListener('submit', event => {
   event.preventDefault();
 
   const query = input.value.trim();
@@ -30,29 +30,30 @@ form.addEventListener('submit', async event => {
   clearGallery();
   showLoader();
 
-  try {
-    const data = await getImagesByQuery(query);
+  getImagesByQuery(query)
+    .then(data => {
+      if (data.hits.length === 0) {
+        iziToast.error({
+          title: 'Error',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+          position: 'topRight',
+        });
+        return;
+      }
 
-    if (data.hits.length === 0) {
+      createGallery(data.hits);
+    })
+    .catch(error => {
       iziToast.error({
         title: 'Error',
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
+        message: 'Something went wrong. Please try again later.',
         position: 'topRight',
       });
-      return;
-    }
-
-    createGallery(data.hits);
-  } catch (error) {
-    iziToast.error({
-      title: 'Error',
-      message: 'Something went wrong. Please try again later.',
-      position: 'topRight',
+      console.error(error);
+    })
+    .finally(() => {
+      hideLoader();
+      input.value = '';
     });
-    console.error(error);
-  } finally {
-    hideLoader();
-    input.value = '';
-  }
 });
